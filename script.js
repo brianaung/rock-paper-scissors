@@ -1,16 +1,11 @@
 const MAX_ROUND = 5;
 
-let shapeArr = [
-  'rock',
-  'paper',
-  'scissors'
-]
-
 /* return the shape that comp is going to play */
 function comPlay() {
-  let randomNum = Math.floor(Math.random() * shapeArr.length);
+  let shapes = [ 'rock', 'paper', 'scissors' ];
+  let randomNum = Math.floor(Math.random() * shapes.length);
 
-  return shapeArr[randomNum];
+  return shapes[randomNum];
 }
 
 /* play a game of rock, paper, scissors */
