@@ -1,3 +1,5 @@
+const MAX_ROUND = 5;
+
 let shapeArr = [
   'rock',
   'paper',
@@ -32,6 +34,12 @@ function playRound(pSelect, cSelect) {
 }
 
 /* get player input, randomise comp input, and call play function */
-const pSelect = prompt('Choose what you want to play (rock, paper, scissors): ');
-const cSelect = comPlay();
-console.log(playRound(pSelect, cSelect));
+function game() {
+  for (let round = 0; round < MAX_ROUND; round++) {
+    const pSelect = prompt('Choose what you want to play (rock, paper, scissors): ');
+    const cSelect = comPlay();
+    console.log(`Round ${round+1}: ${playRound(pSelect, cSelect)}`);
+  }
+}
+
+game();
