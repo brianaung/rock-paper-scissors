@@ -1,6 +1,6 @@
 const MAX_ROUND = 5;
 
-/* return the shape that comp is going to play */
+/* return the shape that COM is going to play */
 function comPlay() {
   let shapes = [ 'rock', 'paper', 'scissors' ];
   let randomNum = Math.floor(Math.random() * shapes.length);
@@ -37,4 +37,5 @@ function game() {
   }
 }
 
+/* play */
 game();
