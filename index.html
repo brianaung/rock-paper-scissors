@@ -6,10 +6,31 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="rps">
-    <img class="rock" src="img/rock.png">
-    <img class="paper" src="img/paper.png">
-    <img class="scissors" src="img/scissors.png">
+  <div class="container">
+    <!-- <div class="results"> -->
+      <!-- P: 0  |  COM: 0 -->
+    <!-- </div> -->
+
+    <!-- content will change dynamically based on random com selection -->
+    <div class="selection">
+      <div class="selection-player">
+        <h3>PLAYER</h1>
+        <h3 class="p-score">0</h3>  <!-- player score -->
+        <div class="player-img"></div>
+      </div>
+      <h3>VS</h3>
+      <div class="selection-computer">
+        <h3>COMPUTER</h1>
+        <h3 class="c-score">0</h3>  <!-- computer score -->
+        <div class="computer-img"></div>
+      </div>
+    </div>
+
+    <div class="rps">
+      <img class="rock" src="img/rock.png">
+      <img class="paper" src="img/paper.png">
+      <img class="scissors" src="img/scissors.png">
+    </div>
   </div>
   <script src="./script.js"></script>
 </body>
