@@ -1,13 +1,3 @@
-const MAX_ROUND = 5;
-
-/* return the shape that COM is going to play */
-function comPlay() {
-  let shapes = [ 'rock', 'paper', 'scissors' ];
-  let randomNum = Math.floor(Math.random() * shapes.length);
-
-  return shapes[randomNum];
-}
-
 /* play a game of rock, paper, scissors */
 function playRound(pSelect, cSelect) {
   let res = '';
@@ -28,13 +18,36 @@ function playRound(pSelect, cSelect) {
   return res;
 }
 
-/* get player input, randomise comp input, and call play function */
+
+/* return the shape that COM is going to play */
+function comPlay() {
+  let shapes = [ 'rock', 'paper', 'scissors' ];
+  let randomNum = Math.floor(Math.random() * shapes.length);
+
+  return shapes[randomNum];
+}
+
+
+/* remove the button click animation */
+function removeTransition(e) {
+  if (e.propertyName !== 'transform') return;
+  e.target.classList.remove('playing');
+}
+
+
+/* play a round of rps using player selection and randomised COM selection */
 function game(e) {
 
   const pSelect = e.target.className;
   const cSelect = comPlay();
 
+  e.target.classList.add('playing');
+
   console.log(`${playRound(pSelect, cSelect)}`);
 }
 
-window.addEventListener('click', game);
+
+/* adding events */
+const selections = Array.from(document.querySelectorAll('.rps img'));
+selections.forEach(s => s.addEventListener('click', game));
+selections.forEach(s => s.addEventListener('transitionend', removeTransition));
