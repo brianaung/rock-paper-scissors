@@ -1,5 +1,7 @@
-var playerScore = 0;
-var comScore = 0;
+const MAX_SCORE = 5;
+
+var playerScore;
+var comScore;
 
 /* return the shape that COM is going to play */
 function comSelection() {
@@ -49,7 +51,14 @@ function playRound(e) {
   const pScore = document.querySelector('.p-score');
   const cScore = document.querySelector('.c-score');
 
+
+  // load img of items played by player and computer
+  pSelectImg.style.backgroundImage = `url(img/${pSelect}.png)`;
+  cSelectImg.style.backgroundImage = `url(img/${cSelect}.png)`;
+
   let res = getResult(pSelect, cSelect);
+
+  // coloring the backgorund of selections (red for lose, green for win)
   if (res === 'player won') {
     pSelectImg.style.backgroundColor = '#a3be8c';
     cSelectImg.style.backgroundColor = '#bf616a';
@@ -57,26 +66,63 @@ function playRound(e) {
     pSelectImg.style.backgroundColor = '#bf616a';
     cSelectImg.style.backgroundColor = '#a3be8c';
   } else if (res === 'draw') {
-    pSelectImg.style.backgroundColor = '#d8dee9';
-    cSelectImg.style.backgroundColor = '#d8dee9';
+    pSelectImg.style.backgroundColor = '#88c0d0';
+    cSelectImg.style.backgroundColor = '#88c0d0';
   }
-
-
-  // load img of items played by player and computer
-  pSelectImg.style.backgroundImage = `url(img/${pSelect}.png)`;
-  cSelectImg.style.backgroundImage = `url(img/${cSelect}.png)`;
 
   // add play animation to the selection buttons
   e.target.classList.add('playing');
-  
 
   // display the current scores
   pScore.textContent = playerScore;
   cScore.textContent = comScore;
+
+  const gameOver = document.querySelector('#game-over h3');
+  if (playerScore === MAX_SCORE) {
+    gameOver.textContent = "YOU WON!!!"; 
+    endGame(e);
+  } else if (comScore === MAX_SCORE) {
+    gameOver.textContent = "BETTER LUCK NEXT TIME =(";
+    endGame(e);
+  }
 }
 
 
-/* adding events */
-const selections = Array.from(document.querySelectorAll('.rps img'));
-selections.forEach(s => s.addEventListener('click', playRound));
-selections.forEach(s => s.addEventListener('transitionend', removeTransition));
+// TODO: clean up redundant variables from playRound func
+/* add event listeners when the game starts */
+function startGame() {
+  
+  // remove events
+  const rps = Array.from(document.querySelectorAll('.rps button'));
+  rps.forEach(s => s.addEventListener('click', playRound));
+  rps.forEach(s => s.addEventListener('transitionend', removeTransition));
+
+  // reset the scores
+  playerScore = 0;
+  comScore = 0;
+  const pScore = document.querySelector('.p-score');
+  const cScore = document.querySelector('.c-score');
+  pScore.textContent = playerScore;
+  cScore.textContent = comScore;
+
+  // remove the game over message
+  const gameOver = document.querySelector('#game-over h3');
+  gameOver.textContent = '';
+}
+
+/* remove event listeners when the game ends */
+function endGame(e) {
+  const rps = Array.from(document.querySelectorAll('.rps button')); 
+  rps.forEach(s => s.removeEventListener('click', playRound));
+  rps.forEach(s => s.removeEventListener('transitionend', removeTransition));
+  e.target.classList.remove('playing');
+}
+
+/* restart game when button is pressed */
+const restartBtn = document.querySelector('.restart-btn');
+restartBtn.addEventListener('click', () => {
+  startGame();
+});
+
+/* call the game */
+startGame();
