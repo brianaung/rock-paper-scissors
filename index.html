@@ -6,12 +6,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <!-- <div class="results"> -->
-      <!-- P: 0  |  COM: 0 -->
-    <!-- </div> -->
+  <h1 class="title">ROCK PAPER SCISSORS</h1>
 
+  <div class="container">
     <!-- content will change dynamically based on random com selection -->
+    <div id="game-over">
+      <h3></h3>
+    </div>
+
+
     <div class="selection">
       <div class="selection-player">
         <h3>PLAYER</h1>
@@ -27,10 +30,12 @@
     </div>
 
     <div class="rps">
-      <img class="rock" src="img/rock.png">
-      <img class="paper" src="img/paper.png">
-      <img class="scissors" src="img/scissors.png">
+      <button class="rock"></button>
+      <button class="paper"></button>
+      <button class="scissors"></button>
     </div>
+
+    <button class="restart-btn"></button>
   </div>
   <script src="./script.js"></script>
 </body>
